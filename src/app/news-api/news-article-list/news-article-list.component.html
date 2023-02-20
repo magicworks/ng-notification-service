@@ -1,0 +1,20 @@
+<h3>News</h3>
+<div class="list-group mb-3">
+  <a
+    *ngFor="let article of articles"
+    class="list-group-item list-group-item-action d-flex flew-row align-items-center"
+    href="{{ article.url }}"
+    target="_blank"
+  >
+    <img *ngIf="article.urlToImage" src="{{ article.urlToImage }}" alt="" />
+
+    <div class="text">
+      {{ article.title | trimOutletName : article.source.name }}
+    </div>
+  </a>
+</div>
+
+<app-paginator
+  [numberOfPages]="numberOfPages"
+  (pageChanged)="onPageChanged($event)"
+></app-paginator>

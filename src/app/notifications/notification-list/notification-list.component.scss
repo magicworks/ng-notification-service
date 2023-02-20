@@ -4,4 +4,13 @@
     bottom: 0;
     right: 10px;
     width: 300px;
+    z-index: 20;
+    
+    .alert {
+        box-shadow: 5px 5px;
+    }
+
+    .text {
+        flex-grow: 100;
+    }
 }

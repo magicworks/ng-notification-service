@@ -19,9 +19,9 @@ interface OpenWeatherResponse {
     main: {
       temp: number;
     };
-  }[];
+  }[],
   city: {
-    name: string;
+    name: string,
     country: string;
   };
 }
@@ -36,10 +36,10 @@ export class ForecastService {
     private http: HttpClient,
     private notificationsService: NotificationsService) { }
 
-  getForecast () {
+  getForecast (): Observable<any> {
     return this.getCurrentLocation()
       .pipe(
-        //tap((value: CoordsResponse) => { console.log(value); }),
+        tap((value) => console.log(value)),
         map(coords => {
           return new HttpParams()
             .set('lat', String(coords.latitude))
@@ -49,7 +49,7 @@ export class ForecastService {
         }),
         switchMap(params => this.http.get<OpenWeatherResponse>(this.url, { params })),
         tap((value) => {
-          this.notificationsService.addSuccess(`Weather data loaded for ${value.city.name}, ${value.city.country}`);
+          this.notificationsService.addSuccess(`Weather data for ${value.city.name}, ${value.city.country} loaded.`);
         }),
         map((value) => value?.list),
         mergeMap(value => of(...value)),
@@ -81,10 +81,10 @@ export class ForecastService {
     return observable.pipe(
       retry(1),
       tap(() => {
-        this.notificationsService.addSuccess('Got your location');
+        this.notificationsService.addSuccess('Got your location.');
       }),
       catchError(() => {
-        this.notificationsService.addError('Failed to get your location. ');
+        this.notificationsService.addError('Failed to get your location.');
         this.notificationsService.addSuccess('Location will be set as Riga, Latvia.');
 
         const coords: CoordsResponse = {
