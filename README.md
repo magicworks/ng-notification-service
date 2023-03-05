@@ -1,6 +1,8 @@
-# Ng Notification Service ng-notification-service.png
+# Ng Notification Service 
 
-A Simple Notification Service Demo. Notifications module may be found at '/src/app/notifications'
+A Simple Notification Service Demo. 
+
+Notifications module may be found at /src/app/notifications.
 
 ![Image](https://magicworks.lv/images/ng-notification-service.png)
 
@@ -30,8 +32,8 @@ constructor(private notificationsService: NotificationsService) {}
 Call Service Methods to Display Notification
 
 ```
-this.notificationsService.addSuccess(`Some message`);
+this.notificationsService.addSuccess(`Success!!`);
 
-this.notificationsService.addError(`Some message`);
+this.notificationsService.addError(`Fail :(`);
 ```
 
